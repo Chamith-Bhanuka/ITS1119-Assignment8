@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment-8-Case2</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #36474f;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .queue-wrapper {
+      display: flex;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .pipe {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 52vw;
+      height: 8vh;
+      border-top: 2px solid white;
+      border-bottom: 2px solid white;
+      border-left: none;
+      border-right: none;
+      background-color: transparent;
+      padding: 0 100px;
+      box-sizing: border-box;
+      gap: 10px;
+      position: relative;
+    }
+
+    .pipe div {
+      width: 10vw;
+      height: 6vh;
+      background-color: white;
+    }
+
+    #rear {
+      margin-top: 10px;
+    }
+
+    #front, #rear {
+      width: 10vw;
+      height: 6vh;
+      background-color: white;
+      position: absolute;
+    }
+
+    #front {
+      top: -8vh;
+      left: 10px;
+    }
+
+    #rear {
+      top: 8vh;
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="queue-wrapper">
+
+  <div class="pipe">
+    <div></div> <!-- div[1] -->
+    <div></div> <!-- div[2] -->
+    <div></div> <!-- div[3] -->
+    <div></div> <!-- div[4] -->
+
+
+    <div id="front"></div>
+    <div id="rear"></div>
+  </div>
+</div>
+
+<script>
+  let colors = ['red', 'green', 'blue', 'yellow', 'pink', 'deeppink'];
+
+  const updateColors = () => {
+    let lastColor = colors.pop();
+    colors.unshift(lastColor);
+
+    document.getElementById("front").style.backgroundColor = colors[0];
+
+    const pipeDivs = document.querySelectorAll(".pipe > div:not(#front):not(#rear)");
+    pipeDivs.forEach((div, index) => {
+      div.style.backgroundColor = colors[index + 1];
+    });
+
+    document.getElementById("rear").style.backgroundColor = colors[5];
+  };
+
+  updateColors();
+  setInterval(updateColors, 1000);
+</script>
+</body>
+</html>
